@@ -1,0 +1,26 @@
+NOTICE
+======
+
+This repository's own code, ComfyUI workflow files and documentation are
+licensed under the MIT License (see LICENSE).
+
+The sample images and 3D assets in `samples/` were generated with
+Qwen-Image-2.1-Turbo and are therefore subject to the model's terms:
+
+    Qwen is licensed under the Qwen RESEARCH LICENSE AGREEMENT,
+    Copyright (c) 2026 Hangzhou Tongyi Laboratory Technology Co., Ltd.
+    All Rights Reserved.
+
+The Qwen Research License permits use, reproduction, distribution and
+modification for NON-COMMERCIAL purposes only. If you redistribute the sample
+assets, ship a copy of that agreement and this notice. If you use the assets
+to train or improve a model that you distribute, you must display
+"Built with Qwen" in the related documentation.
+
+The 3D reconstruction step uses Idol (speridlabs/idol, Apache-2.0) via
+idol-sdk, which is not redistributed here. Model weights are not included in
+this repository; download them from their publishers under their own terms.
+
+Quantized Qwen Image 2.1 files used here:
+  abenzerps/Qwen-Image-2.1-Uncensored-GGUF  (Qwen Research License)
+  Comfy-Org/Qwen-Image-2.1                  (text encoder + VAE, Qwen Research License)

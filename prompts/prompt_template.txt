@@ -1,0 +1,1 @@
+This is an RGBA format image with transparency. A single {object}, shown whole and centred, three-quarter view, studio product photograph, soft even lighting, sharp focus, true-to-life materials and colours, no cast shadow, nothing else in the frame. The image has an alpha channel and a transparent background.

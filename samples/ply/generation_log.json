@@ -1,0 +1,74 @@
+[
+  {
+    "object": "armchair",
+    "ply": "C:\\idol-3d-objects\\samples\\ply\\armchair.ply",
+    "seconds": 143.51,
+    "gaussians": 262144,
+    "camera": {
+      "yaw": 0.06029542662286063,
+      "pitch": -0.3516085201063566,
+      "radius": 23.839435786916738,
+      "fov": 6.998138749203169
+    }
+  },
+  {
+    "object": "coffee_mug",
+    "ply": "C:\\idol-3d-objects\\samples\\ply\\coffee_mug.ply",
+    "seconds": 139.41,
+    "gaussians": 262144,
+    "camera": {
+      "yaw": 0.05541089193904226,
+      "pitch": 0.27885555286049174,
+      "radius": 1000.0,
+      "fov": 0.134505118685225
+    }
+  },
+  {
+    "object": "laptop",
+    "ply": "C:\\idol-3d-objects\\samples\\ply\\laptop.ply",
+    "seconds": 140.0,
+    "gaussians": 262144,
+    "camera": {
+      "yaw": 0.13213398807149557,
+      "pitch": 0.1474370314502013,
+      "radius": 3.291786630146232,
+      "fov": 42.37943868139316
+    }
+  },
+  {
+    "object": "running_shoe",
+    "ply": "C:\\idol-3d-objects\\samples\\ply\\running_shoe.ply",
+    "seconds": 140.55,
+    "gaussians": 262144,
+    "camera": {
+      "yaw": -0.1754481011992593,
+      "pitch": -0.2181009289660295,
+      "radius": 17.080125622874572,
+      "fov": 8.533979744793674
+    }
+  },
+  {
+    "object": "smartphone",
+    "ply": "C:\\idol-3d-objects\\samples\\ply\\smartphone.ply",
+    "seconds": 139.82,
+    "gaussians": 262144,
+    "camera": {
+      "yaw": 2.33615178334269,
+      "pitch": -0.8967511899456266,
+      "radius": 1000.0,
+      "fov": 0.13073227750549035
+    }
+  },
+  {
+    "object": "wireless_headphones",
+    "ply": "C:\\idol-3d-objects\\samples\\ply\\wireless_headphones.ply",
+    "seconds": 139.62,
+    "gaussians": 262144,
+    "camera": {
+      "yaw": 0.12988368569858783,
+      "pitch": 0.26605394871661603,
+      "radius": 1000.0,
+      "fov": 0.13804234571024296
+    }
+  }
+]
