@@ -6,6 +6,9 @@ A ComfyUI workflow generates a single object on a transparent background with
 Qwen-Image-2.1-Turbo, then [Idol](https://huggingface.co/speridlabs/idol) reconstructs
 it as a 3D Gaussian splat from that one image.
 
+Sample images and PLYs are also mirrored as a Hugging Face dataset:
+**https://huggingface.co/datasets/markhitvdrz/idol-3d-objects**
+
 Tested on a laptop with an **8 GB RTX 5050 (sm_120)**, Windows 11, 16 GB RAM.
 
 ![preview](docs/preview.png)
