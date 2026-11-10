@@ -1,0 +1,26 @@
+{
+  "_node_ids": {
+    "load": "1",
+    "idol": "2"
+  },
+  "1": {
+    "class_type": "LoadImage",
+    "_meta": {"title": "Any image"},
+    "inputs": {"image": "input.png"}
+  },
+  "2": {
+    "class_type": "IdolImageTo3D",
+    "_meta": {"title": "Idol — image to 3D"},
+    "inputs": {
+      "image": ["1", 0],
+      "mode": "synthetic",
+      "steps": 50,
+      "num_gaussians": 262144,
+      "seed": 42,
+      "filename_prefix": "3d/object",
+      "weights": "C:\\idol\\idol-bf16",
+      "dtype": "bf16",
+      "keep_loaded": false
+    }
+  }
+}

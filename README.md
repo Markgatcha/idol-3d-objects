@@ -45,6 +45,40 @@ matting step is involved.
 
 Idol detects that alpha and skips its own background removal, so the two stages stay clean.
 
+## Any image → 3D, inside ComfyUI
+
+`comfyui/ComfyUI-Idol` adds a node that runs Idol in-process, so any image — not just a
+generated one — can be turned into a `.ply` from the ComfyUI graph.
+
+| workflow | pipeline |
+|---|---|
+| `workflows/image_to_3d_api.json` | LoadImage → Idol → `.ply` |
+| `workflows/image_to_transparent_3d_api.json` | LoadImage → Qwen Image 2.1 **edit** (reference image + RGBA prompt) → Idol → `.ply` |
+
+Install (the node is a junction into `custom_nodes`; see `comfyui/ComfyUI-Idol/README.md`):
+
+```bat
+python_embeded\python.exe -m pip install diffusers tensordict plyfile pyvers cloudpickle accelerate
+python_embeded\python.exe -m pip install -e C:\idol\idol-sdk
+set HF_HOME=C:\idol\hf-cache
+```
+
+Run any local image through either one:
+
+```bash
+python scripts/run_image.py --image photo.jpg --workflow workflows/image_to_3d_api.json
+python scripts/run_image.py --image photo.jpg --workflow workflows/image_to_transparent_3d_api.json
+```
+
+Measured through ComfyUI on this laptop: **238.8 s** for the direct path (first call includes
+the Idol load), **202 s** for the Idol stage of the transparent path, plus ~95 s for the Qwen
+edit. Repeats are faster because the weights are in the OS cache.
+
+> On a 16 GB machine ComfyUI can only serve **one prompt per process** — reloading the 8.7 GB
+> text encoder crashes with an access violation (`hostbuf_file_reader_read failed` /
+> "Windows fatal exception"). Restart ComfyUI between runs, or drive the same workflows from
+> `scripts/generate_with_restart.py`, which restarts it for you.
+
 ## Setup
 
 ### 1. ComfyUI + Qwen Image 2.1

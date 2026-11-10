@@ -1,9 +1,17 @@
 # Workflows
 
+| file | what it does |
+|---|---|
+| `qwen_2.1_turbo_api.json` | text prompt → 2K RGBA image |
+| `image_to_3d_api.json` | **any image → Idol `.ply`** |
+| `image_to_transparent_3d_api.json` | **any image → Qwen edit (transparent) → Idol `.ply`** |
+
+All three are ComfyUI **API-format** workflows (the shape `/prompt` accepts).
+`scripts/run_image.py` uploads a local image and runs either of the last two.
+
 ## `qwen_2.1_turbo_api.json`
 
-ComfyUI **API-format** workflow (the shape `/prompt` accepts), used by
-`scripts/generate_images.py`. It is a minimal version of the official
+Used by `scripts/generate_images.py`. It is a minimal version of the official
 *Qwen Image 2.1 Turbo — Text to Image* template with the prompt-enhancer branch removed:
 
 | node | type | purpose |
@@ -41,3 +49,22 @@ channel and a transparent background.
 
 RGB under fully transparent pixels is arbitrary (often purple); it is hidden by alpha 0 and
 is ignored by the 3D step, which composites on black using the mask.
+
+## `image_to_3d_api.json`
+
+`LoadImage` → `IdolImageTo3D`. One image in, one `.ply` out. The node lives in
+`comfyui/ComfyUI-Idol` (see its README for install).
+
+## `image_to_transparent_3d_api.json`
+
+`LoadImage` → `TextEncodeQwenImage21` (reference image + RGBA prompt) → sampler → `VAEDecode`
+→ `IdolImageTo3D`, plus a `SaveImage` so the transparent PNG is kept too.
+
+The reference image goes into the autogrow `images` input. **In API format the key is flat:**
+
+```json
+"images.image_1": ["1", 0]
+```
+
+not `"images": {"image_1": ...}`. A nested dict is silently ignored, and the model then
+invents a subject from the text prompt alone (we got a cat instead of the laptop this way).
