@@ -126,6 +126,26 @@ Template Library and swap `Load Diffusion Model` for `Unet Loader (GGUF)`.
 ~140 s of that. Idol is a separate process and reuses the bf16 weights (load ~70 s, then ~140 s
 per object). Six objects end to end: about 40 minutes on this laptop.
 
+### Where the time goes, and what does not help
+
+Per object at 2K: ~45 s ComfyUI process start, ~50 s model load, ~140 s sampling, ~20 s decode,
+then ~140 s Idol (of which **134 s is the 50-step denoiser**; preprocess 0.8 s, encode 3.8 s,
+decode 4.1 s).
+
+Attempted speedups that were rejected because they either gain nothing or cost quality:
+
+| attempt | result |
+|---|---|
+| text encoder on CPU (avoid reloads) | crashes: 8.7 GB encoder + 4.6 GB model on 16 GB RAM |
+| `--disable-smart-memory` | still crashes on the 2nd prompt |
+| batched CFG (`batch_cfg=True`) | 139 s vs 140 s — GPU already saturated |
+| `torch.compile` on the denoiser | Triton cannot compile its driver shim on Python 3.15 |
+| ComfyUI `--fast` | documented as "potentially quality deteriorating" |
+| fewer steps / fewer Gaussians / 1024²→upscale | quality loss |
+
+The floor is ~31 minutes of pure GPU work for six objects at 2K; the remaining time is process
+start and model loading. Four objects fit in under 30 minutes with no compromise.
+
 ## Licences
 
 - **Code and workflow in this repository: MIT** (see `LICENSE`).
